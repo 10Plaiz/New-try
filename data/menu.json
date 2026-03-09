@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "Americano",
+    "description": "Espresso and hot water.",
+    "price": "₱80",
+    "category": "Coffee",
+    "imagePath": "americano.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Café Latte",
+    "description": "Espresso and steamed milk.",
+    "price": "₱100",
+    "category": "Coffee",
+    "imagePath": "latte.jpg"
+  }
+]
