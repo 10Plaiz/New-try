@@ -170,12 +170,16 @@ app.get('/api/health', async (req, res) => {
 });
 
 app.post('/api/auth/create-profile', authenticate, async (req: any, res) => {
+  console.log('--- /api/auth/create-profile Start ---');
+  console.log('Request body:', req.body);
   const { username, phone } = req.body;
   
   if (req.user.profileExists) {
+    console.log('Profile already exists for user:', req.user.id);
     return res.json({ success: true, message: 'Profile already exists' });
   }
 
+  console.log('Attempting to create profile for user:', req.user.id);
   const { data, error } = await getSupabase()
     .from('users')
     .insert({
@@ -190,9 +194,10 @@ app.post('/api/auth/create-profile', authenticate, async (req: any, res) => {
 
   if (error) {
     console.error('Error creating profile:', error);
-    return res.status(500).json({ error: 'Failed to create profile' });
+    return res.status(500).json({ error: 'Failed to create profile', details: error });
   }
 
+  console.log('Profile created successfully:', data);
   res.json({ success: true, user: data });
 });
 
