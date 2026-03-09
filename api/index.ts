@@ -460,24 +460,32 @@ app.get('/api/admin/product-stats', authenticate, async (req: any, res) => {
 
 // Menu API
 app.get('/api/menu', async (req, res) => {
-  res.json([
-    {
-      "id": 1,
-      "name": "Americano",
-      "description": "Espresso and hot water.",
-      "price": "₱80",
-      "category": "Coffee",
-      "imagePath": "americano.jpg"
-    },
-    {
-      "id": 2,
-      "name": "Café Latte",
-      "description": "Espresso and steamed milk.",
-      "price": "₱100",
-      "category": "Coffee",
-      "imagePath": "latte.jpg"
-    }
-  ]);
+  console.log('Received request for /api/menu');
+  try {
+    const menu = [
+      {
+        "id": 1,
+        "name": "Americano",
+        "description": "Espresso and hot water.",
+        "price": "₱80",
+        "category": "Coffee",
+        "imagePath": "americano.jpg"
+      },
+      {
+        "id": 2,
+        "name": "Café Latte",
+        "description": "Espresso and steamed milk.",
+        "price": "₱100",
+        "category": "Coffee",
+        "imagePath": "latte.jpg"
+      }
+    ];
+    console.log('Returning menu:', menu);
+    res.json(menu);
+  } catch (err) {
+    console.error('Error in /api/menu:', err);
+    res.status(500).json({ error: 'Failed to fetch menu' });
+  }
 });
 
 
